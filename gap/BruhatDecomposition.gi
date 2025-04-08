@@ -25,7 +25,7 @@ function(g)
     if IsEvenInt(d) then
         if g in Sp(d,q) then
             Print("Element g in contained in Sp(", d, ", ", q, ") \n");
-            return BruhatDecompositionSp(LGOStandardGensSp(d,q),g);
+            return BruhatDecompositionSp(LGOStandardGensSp(d,fld),g);
         elif g in SU(d,q) then
             Print("Element g in contained in SU(", d, ", ", q, ") \n");
             return BruhatDecompositionSU(LGOStandardGensSU(d,q),g);
