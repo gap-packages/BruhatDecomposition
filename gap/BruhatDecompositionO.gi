@@ -27,13 +27,14 @@ end);
 
 InstallGlobalFunction(  LGOStandardGensSO,
 function(e, d, q)
-
+    local fld;
+    fld := GF(q);
     if e = 1 then
         if d < 6 then
             Error("LGOStandardGens: d has to be at least 6\n");
             return;
         fi;
-        return __LGOStandardGensSOPlus(d,q);
+        return __LGOStandardGensSOPlus(d,fld);
     fi;
 
     if e = -1 then
@@ -41,7 +42,7 @@ function(e, d, q)
             Error("LGOStandardGens: d has to be at least 8\n");
             return;
         fi;
-        return __LGOStandardGensSOMinus(d,q);
+        return __LGOStandardGensSOMinus(d,q); # TODO: use fld?
     fi;
 
     if e = 0 then
@@ -49,7 +50,7 @@ function(e, d, q)
             Error("LGOStandardGens: d has to be at least 7\n");
             return;
         fi;
-        return __LGOStandardGensSOCircle(d,q);
+        return __LGOStandardGensSOCircle(d,fld);
     fi;
 
     Error("e has to be 1, -1 or 0.");
@@ -63,11 +64,10 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensSOPlus,
-function(d,q)
-    local s, sBar, t, tBar, delta, deltaBar, u, v, sigma, fld, w, n, S1, S2, a, b, res;
+function(d,fld)
+    local s, sBar, t, tBar, delta, deltaBar, u, v, sigma, w, n, S1, S2, a, b, res;
 
-    fld := GF(q);
-    w := Z(q);
+    w := PrimitiveRoot(fld);
 
     s := IdentityMat( d, fld );
     s[1,1] := Zero(fld);
@@ -139,11 +139,10 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensSOCircle,
-function(d,q)
-    local s, t, delta, u, v, sigma, fld, w, n, b;
+function(d,fld)
+    local s, t, delta, u, v, sigma, w, n, b;
 
-    fld := GF(q);
-    w := Z(q);
+    w := PrimitiveRoot(fld);
     n := Int((d-1)*1/2);
 
     s := IdentityMat( d, fld );
@@ -266,10 +265,11 @@ end);
 
 InstallGlobalFunction(  LGOStandardGensOmega,
 function(e, d, q)
-
+    local fld;
+    fld := GF(q);
     if (q mod 2 = 0) then
         if e = 1 then
-            return __LGOStandardGensOmegaPlusEvenChar(d,q);
+            return __LGOStandardGensOmegaPlusEvenChar(d,fld);
         fi;
 
         if e = -1 then
@@ -277,11 +277,11 @@ function(e, d, q)
         fi;
 
         if e = 0 then
-            return __LGOStandardGensOmegaCircleEvenChar(d,q);
+            return __LGOStandardGensOmegaCircleEvenChar(d,fld);
         fi;
     else
         if e = 1 then
-            return __LGOStandardGensOmegaPlus(d,q);
+            return __LGOStandardGensOmegaPlus(d,fld);
         fi;
 
         if e = -1 then
@@ -289,7 +289,7 @@ function(e, d, q)
         fi;
 
         if e = 0 then
-            return __LGOStandardGensOmegaCircle(d,q);
+            return __LGOStandardGensOmegaCircle(d,fld);
         fi;
     fi;
 
@@ -304,11 +304,10 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensOmegaPlus,
-function(d,q)
-    local s, sBar, t, tBar, delta, deltaBar, u, v, sigma, fld, w, n, S1, S2, a, b, res;
+function(d,fld)
+    local s, sBar, t, tBar, delta, deltaBar, u, v, sigma, w, n, S1, S2, a, b, res;
 
-    fld := GF(q);
-    w := Z(q);
+    w := PrimitiveRoot(fld);
 
     s := IdentityMat( d, fld );
     s[1,1] := Zero(fld);
@@ -375,11 +374,10 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensOmegaCircle,
-function(d,q)
-    local s, t, delta, u, v, sigma, fld, w, n, S1, a, b, res;
+function(d,fld)
+    local s, t, delta, u, v, sigma, w, n, S1, a, b, res;
 
-    fld := GF(q);
-    w := Z(q);
+    w := PrimitiveRoot(fld);
     n := Int((d-1)*1/2);
 
     s := IdentityMat( d, fld );
@@ -487,11 +485,10 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensOmegaPlusEvenChar,
-function(d,q)
-    local s, t, tBar, delta, deltaBar, u, v, sigma, fld, w, n, S1, S2, a, b, res, J;
+function(d,fld)
+    local s, t, tBar, delta, deltaBar, u, v, sigma, w, n, S1, S2, a, b, res, J;
 
-    fld := GF(q);
-    w := Z(q);
+    w := PrimitiveRoot(fld);
 
     s := IdentityMat( d, fld );
     s[1,1] := Zero(fld);
@@ -547,10 +544,8 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensOmegaCircleEvenChar,
-function(d,q)
-
-    return LGOStandardGensSpEvenChar(d-1,q);
-
+function(d,fld)
+    return LGOStandardGensSpEvenChar(d-1,fld);
 end);
 
 
@@ -624,7 +619,7 @@ function(e,d,fld)
     q := Size(fld);
 
     if e = 1 then
-        gens := __LGOStandardGensSOPlus(d,q);
+        gens := __LGOStandardGensSOPlus(d,fld);
 
         m:= d / 2;
 
@@ -702,7 +697,7 @@ function(e,d,fld)
         SetIsFullSubgroupGLorSLRespectingBilinearForm( G, true );
 
     elif e = 0 then
-        gens := __LGOStandardGensSOCircle(d,q);
+        gens := __LGOStandardGensSOCircle(d,fld);
 
         m:= ( d-1 ) / 2;
 
