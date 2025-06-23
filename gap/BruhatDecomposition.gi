@@ -11,7 +11,7 @@ function(g)
 
     local d, fld, q;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( [g] );
     q := Size(fld);
 

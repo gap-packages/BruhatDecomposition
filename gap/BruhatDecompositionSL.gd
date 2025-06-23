@@ -73,7 +73,6 @@
 #!    <List>
 #!    <Item> <C>MakeSLP()</C>: After the <C>BruhatDecompositionSL()</C> we get a list of instructions to calculate the matrices we want using the LGO standard generators. <C>MakeSLP()</C> is used to get a SLP out of these instructions.</Item>
 #!    <Item> <C>CoefficientsPrimitiveElement()</C>: It expresses an element w in a field fld as a linear combination of a Primitive Element. This is important for the transvections. (TODO Add Reference!) </Item>
-#!    <Item> <C>MyPermutationMat()</C>: Turns a permutation into a permutation matrix. We need it to calculate the LGO standard generator. </Item>
 #!    <Item> <C>LGOStandardGensSL()</C>: This function computes the standard generators of SL
 #!                    as given by C. R. Leedham-Green and E. A. O'Brien in
 #!                    "Constructive Recognition of Classical Groups  in odd characteristic".
@@ -223,8 +222,6 @@
 #!    These functions has been modified by this actions and got a NC Version:
 #! <List>
 #!            <Item><C>MakeSLP()</C>[<Ref Sect="MakeSLP"/>] <M>\to</M> <C>MakeSLPNC()</C>[<Ref Sect="MakeSLPNC"/>] (uses the NC version of <C>StraightLineProgram</C>)</Item>
-#!            <Item><C>MyPermutationMat()</C> [<Ref Sect="MyPermutationMat"/>] <M>\to</M> <C>MyPermutationMatNC()</C> [<Ref Sect="MyPermutationMatNC"/>] (uses the NC version of <C>ConvertToMatrixRep</C>)</Item>
-#!            <Item><C>LGOStandardGensSL()</C> [<Ref Sect="LGOStandardGensSL"/>] <M>\to</M> <C>LGOStandardGensSLNC()</C> [<Ref Sect="LGOStandardGensSLNC"/>] (uses the NC version of <C>MyPermutationMat()</C>)</Item>
 #!            <Item><C>MatToWreathProd()</C> [<Ref Sect="MatToWreathProd"/>] <M>\to</M> <C>MatToWreathProdNC()</C> [<Ref Sect="MatToWreathProdNC"/>] (no checks for user input)</Item>
 #!            <Item><C>TestIfMonomial()</C> [<Ref Sect="TestIfMonomial"/>] <M>\to</M> <C>TestIfMonomialNC()</C> [<Ref Sect="TestIfMonomialNC"/>] (no checks for user input)</Item>
 #!            <Item><C>UnipotentDecomposition()</C> [<Ref Sect="UnipotentDecomposition"/>] <M>\to</M> <C>UnipotentDecompositionNC()</C> [<Ref Sect="UnipotentDecompositionNC"/>] (no checks for user input)</Item>
@@ -249,8 +246,6 @@
 #
 #    This functions has been modified by this actions and got a NC Version:
 #        MakeSLP -> MakeSLPNC (uses the NC version of StraightLineProgram)
-#        MyPermutationMat -> MyPermutationMatNC (uses ConvertToMatrixRepNC)
-#        LGOStandardGensSL -> LGOStandardGensSLNC (uses MyPermutationMatNC)
 #    The NC versions of the following functions do not check for user input
 #        MatToWreathProd -> MatToWreathProdNC
 #        TestIfMonomial -> TestIfMonomialNC
@@ -306,26 +301,6 @@ DeclareGlobalFunction( "MakeSLPNC" );
 #! a linear combination of a Primitive Element.
 DeclareGlobalFunction( "CoefficientsPrimitiveElement" );
 
-
-
-#####
-# MyPermutationMat()
-#####
-
-#! @BeginGroup MyPermutationMatGroup
-#! @Arguments perm dim fld
-#! @Returns The permutation matrix of perm over <M>M_{d x d}(fld)</M> (ie <M>res_{i,j} = One(fld)</M> if <M>i^{perm} = j</M>)
-#! @Description
-#! perm: A permutation, <M>\newline</M>
-#! dim: A natural number, <M>\newline</M>
-#! fld: A field <M>\newline</M>
-#! Given a permutation an integer <M>d > 0</M> and a field fld, this function computes
-#! the permutation matrix <M>P</M> in <M>M_{d x d}(fld)</M>.
-DeclareGlobalFunction( "MyPermutationMat" );
-DeclareGlobalFunction( "MyPermutationMatNC" );
-#! @EndGroup
-
-
 #####
 # LGOStandardGensSL
 #####
@@ -341,7 +316,6 @@ DeclareGlobalFunction( "MyPermutationMatNC" );
 #! "Constructive Recognition of Classical Groups in odd characteristic"
 #! (This matrices can also be found in the paper ch 3.1 ps 6-7)
 DeclareGlobalFunction( "LGOStandardGensSL" );
-DeclareGlobalFunction( "LGOStandardGensSLNC" );
 #! @EndGroup
 
 

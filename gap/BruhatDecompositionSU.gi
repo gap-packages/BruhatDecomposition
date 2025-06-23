@@ -7,23 +7,6 @@
 #    Originally implemented subfunctions
 ####################
 
-#####
-# MakePermutationMat()
-#####
-
-InstallGlobalFunction(  MakePermutationMat,
-function(perm, dim, fld)
-
-    local res;
-
-    res := PermutationMat(perm, dim) * One(fld);
-    ConvertToMatrixRep(res);
-
-    return res;
-
-end);
-
-
 
 #####
 # CoefficientsPrimitiveElementS()
@@ -278,7 +261,7 @@ function(arg)
                     [1,-1],[2,-1],[3,-1],[4,-1],[5,-1], [6,-1], [7,-1]    ];
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
     Galois := GaloisGroup(fld);
     Galois := Filtered(Galois, x -> Order(x) = 2);
@@ -931,7 +914,7 @@ function(arg)
                     [1,-1],[2,-1],[3,-1],[4,-1],[5,-1], [6,-1], [7,-1]    ];
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
     Galois := GaloisGroup(fld);
     Galois := Filtered(Galois, x -> Order(x) = 2);
@@ -1673,7 +1656,7 @@ function(arg)
                     [1,-1],[2,-1],[3,-1],[4,-1],[5,-1], [6,-1], [7,-1]    ];
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( [g] );
     Galois := GaloisGroup(fld);
     Galois := Filtered(Galois, x -> Order(x) = 2);
@@ -2584,7 +2567,7 @@ function(arg)
         Add(slp, [[7,-1],14]);
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( [g] );
     Galois := GaloisGroup(fld);
     Galois := Filtered(Galois, x -> Order(x) = 2);
@@ -3181,7 +3164,7 @@ end);
 InstallGlobalFunction(  UnitriangularDecompositionSU,
 function(g)
 
-    if (Length(g) mod 2) = 0 then
+    if IsEvenInt(NrRows(g)) then
         return UnitriangularDecompositionSUEven(g);
     else
         return UnitriangularDecompositionSUOdd(g);
@@ -3358,7 +3341,7 @@ function(stdgens, g)
     fld := FieldOfMatrixList( [g] );
 
     if Size(fld) mod 2 = 0 then
-        if (Length(g) mod 2) = 0 then
+        if IsEvenInt(NrRows(g)) then
 
             # We write an SLP into the variable slp
             # The first 12 entries are the stdgens and their inverses
@@ -3483,7 +3466,7 @@ function(stdgens, g)
         fi;
     fi;
 
-    if (Length(g) mod 2) = 0 then
+    if IsEvenInt(NrRows(g)) then
 
         # We write an SLP into the variable slp
         # The first 12 entries are the stdgens and their inverses

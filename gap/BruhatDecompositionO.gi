@@ -934,7 +934,7 @@ function(arg)
                     [1,-1],[2,-1],[3,-1],[4,-1],[5,-1], [6,-1], [7,-1], [8,-1], [9,-1]   ];
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     # To create an MSLP, we allocate all the memory needed at the beginning.
@@ -1520,7 +1520,7 @@ function(arg)
                     [1,-1],[2,-1],[3,-1],[4,-1],[5,-1], [6,-1]  ];
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     # To create an MSLP, we allocate all the memory needed at the beginning.
@@ -2133,7 +2133,7 @@ function(arg)
                     [1,-1],[2,-1],[3,-1],[4,-1],[5,-1], [6,-1]  ];
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     mat := GeneratorsOfGroup(MSO(-1,d,fld))[3];
@@ -4005,9 +4005,9 @@ function(stdgens, g)
 
     local slp, u1, pm, u2, p_sign, diag, res1, res2, res3, lastline, line, pgr;
 
-    if (Length(g) mod 2) = 0 then
+    if IsEvenInt(NrRows(g)) then
 
-        if (g in MSO(1,Length(g),FieldOfMatrixList( stdgens ))) then
+        if (g in MSO(1,NrRows(g),FieldOfMatrixList( stdgens ))) then
 
             # We write an SLP into the variable slp
             # The first 12 entries are the stdgens and their inverses
@@ -4065,7 +4065,7 @@ function(stdgens, g)
             #    R[1] = u1, R[2] = u2, R[3] = p_sign, R[4] = diag
             return [pgr, [ u1, u2, p_sign^(-1), diag ]];
 
-        elif (g in MSO(-1,Length(g),FieldOfMatrixList( stdgens ))) then
+        elif (g in MSO(-1,NrRows(g),FieldOfMatrixList( stdgens ))) then
 
             # We write an SLP into the variable slp
             # The first 12 entries are the stdgens and their inverses
@@ -4124,7 +4124,7 @@ function(stdgens, g)
             return [pgr, [ u1, u2, p_sign^(-1), diag ]];
         fi;
 
-    elif (g in MSO(0,Length(g),FieldOfMatrixList( stdgens ))) then
+    elif (g in MSO(0,NrRows(g),FieldOfMatrixList( stdgens ))) then
 
         # We write an SLP into the variable slp
         # The first 12 entries are the stdgens and their inverses
@@ -4192,9 +4192,9 @@ function(stdgens, g)
 
     local slp, u1, pm, u2, p_sign, diag, res1, res2, res3, lastline, line, pgr;
 
-    if (Length(g) mod 2) = 0 then
+    if IsEvenInt(NrRows(g)) then
 
-        if (g in MSO(-1,Length(g),FieldOfMatrixList( stdgens ))) then
+        if (g in MSO(-1,NrRows(g),FieldOfMatrixList( stdgens ))) then
 
             # We write an SLP into the variable slp
             # The first 12 entries are the stdgens and their inverses

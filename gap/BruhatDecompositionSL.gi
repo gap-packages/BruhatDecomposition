@@ -126,48 +126,6 @@ end);
 
 
 #####
-# MyPermutationMat()
-#####
-
-# Given a permutation an integer d > 0 and a field fld, this function computes
-# the permutation matrix P in M_{d x d}(fld).
-
-# Input:
-#    perm:    A permutation
-#    dim:     A natural number
-#    fld:     A field
-
-# Output: res: The permutation matrix of perm over M_{d x d}(fld)
-#                 (ie res_{i,j} = One(fld) if i^perm = j)
-
-InstallGlobalFunction(  MyPermutationMat,
-function(perm, dim, fld)
-
-    local res;
-
-    res := PermutationMat(perm, dim, fld);
-    ConvertToMatrixRep(res);
-
-    return res;
-
-end);
-
-
-InstallGlobalFunction(  MyPermutationMatNC,
-function(perm, dim, fld)
-
-    local res;
-
-    res := PermutationMat( perm, dim, fld );
-    ConvertToMatrixRepNC(res);
-
-    return res;
-
-end);
-
-
-
-#####
 # LGOStandardGensSL
 #####
 
@@ -186,9 +144,11 @@ end);
 InstallGlobalFunction(  LGOStandardGensSL,
 function( d, q )
 
-    local t, w, s, x, v, i, delta, fld;
+    local t, w, s, x, v, i, delta, fld, z, e;
 
     fld := GF(q);
+    z := Zero(fld);
+    e := One(fld);
 
     if d < 3 then
         Error("LGOStandardGens: d has to be at least 3\n");
@@ -197,74 +157,28 @@ function( d, q )
 
     # t: The transvection
     t := IdentityMat( d, fld );
-    t[1,2] := One(fld);
+    t[1,2] := e;
+    ConvertToMatrixRep(t);
 
     # delta: The diagonal matrix
     delta := IdentityMat(d,fld);
     delta[1,1] := PrimitiveRoot(fld);
     delta[2,2] := PrimitiveRoot(fld)^-1;
+    ConvertToMatrixRep(delta);
 
     # s: The transposition
-    s := IdentityMat( d, fld );
-    s{[1..2]}{[1..2]} :=  MyPermutationMat( (1,2), 2, fld );
-    s[2,1] := - s[2,1];
-
+    s := PermutationMat( (1,2), d, fld );
+    s[2,1] := -e;
+    ConvertToMatrixRep(s);
 
     # x: The 4-cycle (resp identity if d odd)
     if IsEvenInt(d) then
-        x := MyPermutationMat( (1,2,3,4), d, fld );
-        x[4,1] := - x[4,1];
+        x := PermutationMat( (1,2,3,4), d, fld );
+        x[4,1] := -e;
     else
         x := IdentityMat(d,fld);
     fi;
-
-    # v: The cycle
-    if IsEvenInt(d) then
-        if d = 2 then
-            v := ();
-        else
-            v := (1,3)(2,4);
-            for i in [5,7 .. d-1] do
-                v := v * (1,i)(2,i+1);
-            od;
-        fi;
-        v := MyPermutationMat( v, d, fld );
-
-    else
-        v :=  NullMat(d, d, fld);
-        v[1,d] := One(fld);
-        v{[ 2..d ]}{[ 1..d-1 ]} := - IdentityMat( d-1 , fld );
-    fi;
-
-    return [ s, t, delta, v, x ];
-
-end);
-
-
-InstallGlobalFunction(  LGOStandardGensSLNC,
-function( d, q )
-
-    local s, t, delta, v, x, i, fld;
-
-    fld := GF(q);
-
-
-    # s: The transposition
-    s := IdentityMat( d, fld );
-    s{[ 1..2 ]}{[ 1..2 ]} :=  MyPermutationMatNC( (1,2), 2, fld );
-    s[2,1] := - s[2,1];
-
-
-    # t: The transvection
-    t := IdentityMat( d, fld );
-    t[1,2] := One(fld);
-
-
-    # delta: The diagonal matrix
-    delta := IdentityMat(d,fld);
-    delta[1,1] := Z(q);
-    delta[2,2] := Z(q)^-1;
-
+    ConvertToMatrixRep(x);
 
     # v: The cycle
     if IsEvenInt(d) then
@@ -276,28 +190,18 @@ function( d, q )
                 v := v * (1,i)(2,i+1);
             od;
         fi;
-        v := MyPermutationMatNC( v, d, fld );
+        v := PermutationMat( v, d, fld );
 
     else
-        v :=  NullMat(d, d, fld);
-        v[1,d] := One(fld);
+        v := NullMat(d, d, fld);
+        v[1,d] := e;
         v{[ 2..d ]}{[ 1..d-1 ]} := - IdentityMat( d-1 , fld );
     fi;
-
-
-    # x: The 4-cycle (resp identity if d odd)
-    if IsEvenInt(d) then
-        x := MyPermutationMatNC( (1,2,3,4), d, fld );
-        x[4,1] := - x[4,1];
-    else
-        x := IdentityMat(d,fld);
-    fi;
-
+    ConvertToMatrixRep(v);
 
     return [ s, t, delta, v, x ];
 
 end);
-
 
 
 
@@ -1036,7 +940,7 @@ function( arg )
     fi;
 
     # the matrix
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     # To create an MSLP, we allocate all the memory needed at the beginning.
@@ -1667,7 +1571,7 @@ function( arg )
     fi;
 
     # the matrix
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     # To create an MSLP, we allocate all the memory needed at the beginning.
@@ -2107,7 +2011,7 @@ function(arg)
 
     # the matrix
     g := MutableCopyMat(g); #ie Matrix can be modified
-    d := Length(g);
+    d := NrRows(g);
     fld := FieldOfMatrixList(stdgens);
 
     # To create a MSLP, we allocate all the memory needed at the beginning.
@@ -2413,7 +2317,7 @@ function( arg )
 
     # the matrix
     g := MutableCopyMat(g); #ie Matrix can be modified
-    d := Length(g);
+    d := NrRows(g);
     fld := FieldOfMatrixList(stdgens);
 
     # To create a MSLP, we allocate all the memory needed at the beginning.

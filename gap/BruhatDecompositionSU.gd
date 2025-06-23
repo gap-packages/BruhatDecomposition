@@ -35,20 +35,6 @@
 #    Originally implemented subfunctions
 ####################
 
-#####
-# MakePermutationMat()
-#####
-
-#! @Arguments perm dim fld
-#! @Returns The permutation matrix of perm over <M>M_{d x d}(fld)</M> (ie <M>res_{i,j} = One(fld)</M> if <M>i^{perm} = j</M>)
-#! @Description
-#! perm: A permutation, <M>\newline</M>
-#! dim: A natural number, <M>\newline</M>
-#! fld: A field <M>\newline</M>
-#! This is the same function as MyPermutationMat.
-DeclareGlobalFunction( "MakePermutationMat" );
-
-
 
 #####
 # LGOStandardGensSU
