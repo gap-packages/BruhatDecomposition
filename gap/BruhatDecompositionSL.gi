@@ -963,7 +963,7 @@ function( arg )
     fi;
 
     # the matrix
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     # To create an MSLP, we allocate all the memory needed at the beginning.
@@ -1594,7 +1594,7 @@ function( arg )
     fi;
 
     # the matrix
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     # To create an MSLP, we allocate all the memory needed at the beginning.
@@ -2034,7 +2034,7 @@ function(arg)
 
     # the matrix
     g := MutableCopyMat(g); #ie Matrix can be modified
-    d := Length(g);
+    d := NrRows(g);
     fld := FieldOfMatrixList(stdgens);
 
     # To create a MSLP, we allocate all the memory needed at the beginning.
@@ -2340,7 +2340,7 @@ function( arg )
 
     # the matrix
     g := MutableCopyMat(g); #ie Matrix can be modified
-    d := Length(g);
+    d := NrRows(g);
     fld := FieldOfMatrixList(stdgens);
 
     # To create a MSLP, we allocate all the memory needed at the beginning.

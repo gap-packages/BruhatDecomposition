@@ -282,7 +282,7 @@ function( arg )
                     [1,-1],[2,-1],[3,-1],[4,-1],[5,-1], [6,-1]   ];
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     # To create an MSLP, we allocate all the memory needed at the beginning.
@@ -1026,7 +1026,7 @@ function( arg )
                     [1,-1],[2,-1],[3,-1],[4,-1],[5,-1], [6,-1]   ];
     fi;
 
-    d := Length( g );
+    d := NrRows( g );
     fld := FieldOfMatrixList( stdgens );
 
     # To create an MSLP, we allocate all the memory needed at the beginning.
