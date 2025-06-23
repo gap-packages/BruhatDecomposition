@@ -7,23 +7,6 @@
 #    Originally implemented subfunctions
 ####################
 
-#####
-# MakePermutationMat()
-#####
-
-InstallGlobalFunction(  MakePermutationMat,
-function(perm, dim, fld)
-
-    local res;
-
-    res := PermutationMat(perm, dim) * One(fld);
-    ConvertToMatrixRep(res);
-
-    return res;
-
-end);
-
-
 
 #####
 # CoefficientsPrimitiveElementS()
