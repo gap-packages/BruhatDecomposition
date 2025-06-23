@@ -73,7 +73,6 @@
 #!    <List>
 #!    <Item> <C>MakeSLP()</C>: After the <C>BruhatDecompositionSL()</C> we get a list of instructions to calculate the matrices we want using the LGO standard generators. <C>MakeSLP()</C> is used to get a SLP out of these instructions.</Item>
 #!    <Item> <C>CoefficientsPrimitiveElement()</C>: It expresses an element w in a field fld as a linear combination of a Primitive Element. This is important for the transvections. (TODO Add Reference!) </Item>
-#!    <Item> <C>MyPermutationMat()</C>: Turns a permutation into a permutation matrix. We need it to calculate the LGO standard generator. </Item>
 #!    <Item> <C>LGOStandardGensSL()</C>: This function computes the standard generators of SL
 #!                    as given by C. R. Leedham-Green and E. A. O'Brien in
 #!                    "Constructive Recognition of Classical Groups  in odd characteristic".
@@ -301,25 +300,6 @@ DeclareGlobalFunction( "MakeSLPNC" );
 #! It expresses an element alpha in a field fld as
 #! a linear combination of a Primitive Element.
 DeclareGlobalFunction( "CoefficientsPrimitiveElement" );
-
-
-
-#####
-# MyPermutationMat()
-#####
-
-#! @BeginGroup MyPermutationMatGroup
-#! @Arguments perm dim fld
-#! @Returns The permutation matrix of perm over <M>M_{d x d}(fld)</M> (ie <M>res_{i,j} = One(fld)</M> if <M>i^{perm} = j</M>)
-#! @Description
-#! perm: A permutation, <M>\newline</M>
-#! dim: A natural number, <M>\newline</M>
-#! fld: A field <M>\newline</M>
-#! Given a permutation an integer <M>d > 0</M> and a field fld, this function computes
-#! the permutation matrix <M>P</M> in <M>M_{d x d}(fld)</M>.
-DeclareGlobalFunction( "MyPermutationMat" );
-#! @EndGroup
-
 
 #####
 # LGOStandardGensSL
