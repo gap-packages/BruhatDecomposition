@@ -224,7 +224,6 @@
 #! <List>
 #!            <Item><C>MakeSLP()</C>[<Ref Sect="MakeSLP"/>] <M>\to</M> <C>MakeSLPNC()</C>[<Ref Sect="MakeSLPNC"/>] (uses the NC version of <C>StraightLineProgram</C>)</Item>
 #!            <Item><C>MyPermutationMat()</C> [<Ref Sect="MyPermutationMat"/>] <M>\to</M> <C>MyPermutationMatNC()</C> [<Ref Sect="MyPermutationMatNC"/>] (uses the NC version of <C>ConvertToMatrixRep</C>)</Item>
-#!            <Item><C>LGOStandardGensSL()</C> [<Ref Sect="LGOStandardGensSL"/>] <M>\to</M> <C>LGOStandardGensSLNC()</C> [<Ref Sect="LGOStandardGensSLNC"/>] (uses the NC version of <C>MyPermutationMat()</C>)</Item>
 #!            <Item><C>MatToWreathProd()</C> [<Ref Sect="MatToWreathProd"/>] <M>\to</M> <C>MatToWreathProdNC()</C> [<Ref Sect="MatToWreathProdNC"/>] (no checks for user input)</Item>
 #!            <Item><C>TestIfMonomial()</C> [<Ref Sect="TestIfMonomial"/>] <M>\to</M> <C>TestIfMonomialNC()</C> [<Ref Sect="TestIfMonomialNC"/>] (no checks for user input)</Item>
 #!            <Item><C>UnipotentDecomposition()</C> [<Ref Sect="UnipotentDecomposition"/>] <M>\to</M> <C>UnipotentDecompositionNC()</C> [<Ref Sect="UnipotentDecompositionNC"/>] (no checks for user input)</Item>
@@ -249,8 +248,6 @@
 #
 #    This functions has been modified by this actions and got a NC Version:
 #        MakeSLP -> MakeSLPNC (uses the NC version of StraightLineProgram)
-#        MyPermutationMat -> MyPermutationMatNC (uses ConvertToMatrixRepNC)
-#        LGOStandardGensSL -> LGOStandardGensSLNC (uses MyPermutationMatNC)
 #    The NC versions of the following functions do not check for user input
 #        MatToWreathProd -> MatToWreathProdNC
 #        TestIfMonomial -> TestIfMonomialNC
@@ -341,7 +338,6 @@ DeclareGlobalFunction( "MyPermutationMatNC" );
 #! "Constructive Recognition of Classical Groups in odd characteristic"
 #! (This matrices can also be found in the paper ch 3.1 ps 6-7)
 DeclareGlobalFunction( "LGOStandardGensSL" );
-DeclareGlobalFunction( "LGOStandardGensSLNC" );
 #! @EndGroup
 
 
