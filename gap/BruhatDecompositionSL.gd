@@ -223,7 +223,6 @@
 #!    These functions has been modified by this actions and got a NC Version:
 #! <List>
 #!            <Item><C>MakeSLP()</C>[<Ref Sect="MakeSLP"/>] <M>\to</M> <C>MakeSLPNC()</C>[<Ref Sect="MakeSLPNC"/>] (uses the NC version of <C>StraightLineProgram</C>)</Item>
-#!            <Item><C>MyPermutationMat()</C> [<Ref Sect="MyPermutationMat"/>] <M>\to</M> <C>MyPermutationMatNC()</C> [<Ref Sect="MyPermutationMatNC"/>] (uses the NC version of <C>ConvertToMatrixRep</C>)</Item>
 #!            <Item><C>MatToWreathProd()</C> [<Ref Sect="MatToWreathProd"/>] <M>\to</M> <C>MatToWreathProdNC()</C> [<Ref Sect="MatToWreathProdNC"/>] (no checks for user input)</Item>
 #!            <Item><C>TestIfMonomial()</C> [<Ref Sect="TestIfMonomial"/>] <M>\to</M> <C>TestIfMonomialNC()</C> [<Ref Sect="TestIfMonomialNC"/>] (no checks for user input)</Item>
 #!            <Item><C>UnipotentDecomposition()</C> [<Ref Sect="UnipotentDecomposition"/>] <M>\to</M> <C>UnipotentDecompositionNC()</C> [<Ref Sect="UnipotentDecompositionNC"/>] (no checks for user input)</Item>
@@ -319,7 +318,6 @@ DeclareGlobalFunction( "CoefficientsPrimitiveElement" );
 #! Given a permutation an integer <M>d > 0</M> and a field fld, this function computes
 #! the permutation matrix <M>P</M> in <M>M_{d x d}(fld)</M>.
 DeclareGlobalFunction( "MyPermutationMat" );
-DeclareGlobalFunction( "MyPermutationMatNC" );
 #! @EndGroup
 
 

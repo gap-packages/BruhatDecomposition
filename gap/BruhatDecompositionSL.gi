@@ -153,20 +153,6 @@ function(perm, dim, fld)
 end);
 
 
-InstallGlobalFunction(  MyPermutationMatNC,
-function(perm, dim, fld)
-
-    local res;
-
-    res := PermutationMat( perm, dim, fld );
-    ConvertToMatrixRepNC(res);
-
-    return res;
-
-end);
-
-
-
 #####
 # LGOStandardGensSL
 #####
