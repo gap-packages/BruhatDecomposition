@@ -283,6 +283,7 @@
 #! generators and is the input of our straight-line program.
 #! Defining and SLP we thus have to exclude this instructions from our list.
 DeclareGlobalFunction( "MakeSLP" );
+#! @Arguments slp genlen
 DeclareGlobalFunction( "MakeSLPNC" );
 #! @EndGroup
 
@@ -367,6 +368,7 @@ DeclareGlobalFunction( "HighestSlotOfSLP" );
 #! Due to their relation to wreath-products, we will call denote the image
 #! of a matrix <M>M \in \langle s,v,x \rangle </M> by Mwr
 DeclareGlobalFunction( "MatToWreathProd" );
+#! @Arguments M
 DeclareGlobalFunction( "MatToWreathProdNC" );
 #! @EndGroup
 
@@ -419,6 +421,7 @@ DeclareGlobalFunction( "AEM" );
 #! Tests if a given matrix <M>M</M> is a monomial matrix.
 #! There is function in GAP, however it does not seem to work for SL<M>(d,q)</M>.
 DeclareGlobalFunction( "TestIfMonomial" );
+#! @Arguments M
 DeclareGlobalFunction( "TestIfMonomialNC" );
 #! @EndGroup
 
@@ -461,6 +464,7 @@ DeclareGlobalFunction( "Transvections2" );
 #! g: A matrix in SL(<M>d,q</M>) <M>\newline</M>
 #! Computes the Unitriangular decomposition of the matrix <M>g</M>.
 DeclareGlobalFunction( "UnipotentDecomposition" );
+#! @Arguments stdgens g
 DeclareGlobalFunction( "UnipotentDecompositionNC" );
 #! @EndGroup
 
@@ -482,6 +486,7 @@ DeclareGlobalFunction( "UnipotentDecompositionNC" );
 #! In this version we will store all the transvections <M>t_{i,i-1}(\omega^\ell)</M>.
 #! this will increase the memory usage by <M>(d-3) \cdot f</M> but reduce the runtime.
 DeclareGlobalFunction( "UnipotentDecompositionWithTi" );
+#! @Arguments stdgens g
 DeclareGlobalFunction( "UnipotentDecompositionWithTiNC" );
 #! @EndGroup
 
@@ -502,6 +507,7 @@ DeclareGlobalFunction( "UnipotentDecompositionWithTiNC" );
 #! M: A monomial matrix. <M>\newline</M>
 #! Find the permutation (in Sym(<M>d</M>)) corresponding to the input monomial matrix.
 DeclareGlobalFunction( "PermutationMonomialMatrix" );
+#! @Arguments M
 DeclareGlobalFunction( "PermutationMonomialMatrixNC" );
 #! @EndGroup
 
@@ -533,6 +539,7 @@ DeclareGlobalFunction( "PermutationMonomialMatrixNC" );
 #! simultaneously (here using their identification with permutations in Sym(<M>2d</M>)
 #! and identifying <M>\{ \pi_s, \pi_v, \pi_x \}</M> with <M>\{ s,v,x \}</M> )
 DeclareGlobalFunction( "PermSLP" );
+#! @Arguments stdgens mat slp
 DeclareGlobalFunction( "PermSLPNC" );
 #! @EndGroup
 
@@ -552,6 +559,7 @@ DeclareGlobalFunction( "PermSLPNC" );
 #! Writes a list of instructions which evaluated on LGO standard-generators
 #! yield the diagonal matrix of the input.
 DeclareGlobalFunction( "DiagonalDecomposition" );
+#! @Arguments stdgens diag slp
 DeclareGlobalFunction( "DiagonalDecompositionNC" );
 #! @EndGroup
 
@@ -579,6 +587,7 @@ DeclareGlobalFunction( "DiagonalDecompositionNC" );
 #! It furthermore yields an SLP that returns the above matrices if evaluated
 #! with the LGO standard-generators.
 DeclareGlobalFunction( "BruhatDecompositionSL" );
+#! @Arguments stdgens g
 DeclareGlobalFunction( "BruhatDecompositionSLNC" );
 #! @EndGroup
 
@@ -597,5 +606,6 @@ DeclareGlobalFunction( "BruhatDecompositionSLNC" );
 #! As <C>BruhatDecompositionSL()</C> but replaces <C>UnipotentDecomposition()</C>
 #! by <C>UnipotentDecompositionWithTi()</C>.
 DeclareGlobalFunction( "BruhatDecompositionSLWithTi" );
+#! @Arguments stdgens g
 DeclareGlobalFunction( "BruhatDecompositionSLWithTiNC" );
 #! @EndGroup
