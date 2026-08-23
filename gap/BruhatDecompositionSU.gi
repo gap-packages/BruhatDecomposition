@@ -3166,12 +3166,22 @@ end);
 #####
 
 InstallGlobalFunction(  UnitriangularDecompositionSU,
-function(g)
+function(stdgens, g)
 
-    if IsEvenInt(NrRows(g)) then
-        return UnitriangularDecompositionSUEven(g);
+    local fld;
+
+    fld := FieldOfMatrixList( stdgens );
+
+    if IsEvenInt( NrRows(g) ) then
+        if IsEvenInt( Characteristic(fld) ) then
+            return UnitriangularDecompositionSUEvenAndEvenChar( stdgens, g );
+        fi;
+        return UnitriangularDecompositionSUEven( stdgens, g );
     else
-        return UnitriangularDecompositionSUOdd(g);
+        if IsEvenInt( Characteristic(fld) ) then
+            return UnitriangularDecompositionSUOddAndEvenChar( stdgens, g );
+        fi;
+        return UnitriangularDecompositionSUOdd( stdgens, g );
     fi;
 
 end);
@@ -4735,15 +4745,25 @@ end);
 InstallGlobalFunction(  DiagSLPSU,
 function(arg)
 
-    local diag, n;
+    local fld;
 
-     diag := arg[2];
-     n := Length(diag);
+    if Length(arg) < 2 or not IsList(arg[1]) or not IsMatrix(arg[2]) then
+        Error("Input: LGO standard generators and a diagonal matrix");
+        return;
+    fi;
 
-    if (n mod 2) = 0 then
-        return DiagSLPSUEven(arg);
+    fld := FieldOfMatrixList( arg[1] );
+
+    if IsEvenInt( Length(arg[2]) ) then
+        if IsEvenInt( Characteristic(fld) ) then
+            return CallFuncList( DiagSLPSUEvenAndEvenChar, arg );
+        fi;
+        return CallFuncList( DiagSLPSUEven, arg );
     else
-        return DiagSLPSUOdd(arg);
+        if IsEvenInt( Characteristic(fld) ) then
+            return CallFuncList( DiagSLPSUOddAndEvenChar, arg );
+        fi;
+        return CallFuncList( DiagSLPSUOdd, arg );
     fi;
 
 end);
