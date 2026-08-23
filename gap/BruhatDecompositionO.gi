@@ -2631,6 +2631,9 @@ function( arg )
         # In order to make it coincide with the other possible output.
         # This is ok since it is Id
         Add( slp, [ [p_signpos,-1] , p_signpos ] );
+        # The caller appends this last line to the return line of the SLP,
+        # so it has to be a word and not an assignment.
+        Add( slp, [ p_signpos ,1 ] );
         return [ slp, [ stdgens[1]^0, mat ] ];
     fi;
 
@@ -3206,6 +3209,9 @@ function( arg )
         # In order to make it coincide with the other possible output.
         # This is ok since it is Id
         Add( slp, [ [p_signpos,-1] , p_signpos ] );
+        # The caller appends this last line to the return line of the SLP,
+        # so it has to be a word and not an assignment.
+        Add( slp, [ p_signpos ,1 ] );
         return [ slp, [ stdgens[1]^0, mat ] ];
     fi;
 
