@@ -23,6 +23,10 @@ BruhatFamilies :=
        gens := function(d,q) return LGOStandardGensSL(d,q); end,
        decomp := BruhatDecompositionSLWithTi,
        ok := function(d,q) return d >= 6; end ),
+  rec( name := "SL (WithTi, NC)",
+       gens := function(d,q) return LGOStandardGensSL(d,q); end,
+       decomp := BruhatDecompositionSLWithTiNC,
+       ok := function(d,q) return d >= 6; end ),
   rec( name := "Sp",
        gens := function(d,q) return LGOStandardGensSp(d,q); end,
        decomp := BruhatDecompositionSp,
@@ -74,6 +78,24 @@ BruhatCheckElement := function( fam, stdgens, g, label )
         return [ Concatenation( label, ": the returned matrices differ from the SLP result" ) ];
     fi;
     return [];
+end;
+
+# True if calling func with args raises an error, which is what every one of
+# these functions is supposed to do on input it cannot use.
+BruhatRejects := function( func, args )
+    local res, breakOnError, errorOutput;
+
+    breakOnError := BreakOnError;
+    BreakOnError := false;
+    # The error message is the point of the call, not something to print.
+    MakeReadWriteGlobal( "ERROR_OUTPUT" );
+    errorOutput := ERROR_OUTPUT;
+    ERROR_OUTPUT := OutputTextString( "", false );
+    res := CALL_WITH_CATCH( func, args );
+    ERROR_OUTPUT := errorOutput;
+    MakeReadOnlyGlobal( "ERROR_OUTPUT" );
+    BreakOnError := breakOnError;
+    return not res[1];
 end;
 
 # Monomial elements, which take a different path through the decomposition
