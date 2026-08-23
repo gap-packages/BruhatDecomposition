@@ -1659,7 +1659,7 @@ function(arg)
     fi;
 
     d := NrRows( g );
-    fld := FieldOfMatrixList( [g] );
+    fld := FieldOfMatrixList( stdgens );
     Galois := GaloisGroup(fld);
     Galois := Filtered(Galois, x -> Order(x) = 2);
     phi := Galois[1];
@@ -2571,7 +2571,7 @@ function(arg)
     fi;
 
     d := NrRows( g );
-    fld := FieldOfMatrixList( [g] );
+    fld := FieldOfMatrixList( stdgens );
     Galois := GaloisGroup(fld);
     Galois := Filtered(Galois, x -> Order(x) = 2);
     phi := Galois[1];
@@ -3342,7 +3342,7 @@ function(stdgens, g)
 
     local slp, u1, pm, u2, p_sign, diag, res1, res2, res3, lastline, line, pgr, fld;
 
-    fld := FieldOfMatrixList( [g] );
+    fld := FieldOfMatrixList( stdgens );
 
     if Size(fld) mod 2 = 0 then
         if IsEvenInt(NrRows(g)) then
@@ -3354,7 +3354,7 @@ function(stdgens, g)
             Info( InfoBruhat, 1,
                     "returns an SLP to generate u1, u2, p_sign, diag\n"    );
 
-            fld := FieldOfMatrixList( [g] );
+            fld := FieldOfMatrixList( stdgens );
 
             # Compute the matrices u1,u2 of Bruhat-Decomposition and the instructions
             # for an SLP that compute u1 and u2
