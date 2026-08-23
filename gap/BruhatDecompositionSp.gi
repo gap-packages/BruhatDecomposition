@@ -51,7 +51,7 @@
 InstallGlobalFunction(  UnitriangularDecompositionSp,
 function( arg )
 
-    local u1, u2, d, fld, f, alpha, c, r, j, a, z, i, Mul, g, ell, slp, hs, tmppos, AEMrespos, u1pos, u2pos, tvpos, T2pos, T3pos, T4pos, tmppos2, uipos, q, f2, TransvecAtAlpha2, TransvecAtAlpha3, TransvecAtAlpha4, test, ShiftTransvection3ByJ, ShiftTransvection3ByI, ShiftTransvection4, ShiftTransvection2ByJ, ShiftTransvection2ByI, stdgens;
+    local u1, u2, d, fld, f, alpha, c, r, j, a, z, i, Mul, g, ell, slp, hs, tmppos, AEMrespos, u1pos, u2pos, tvpos, T2pos, T3pos, T4pos, tmppos2, uipos, f2, TransvecAtAlpha2, TransvecAtAlpha3, TransvecAtAlpha4, test, ShiftTransvection3ByJ, ShiftTransvection3ByI, ShiftTransvection4, ShiftTransvection2ByJ, ShiftTransvection2ByI, stdgens;
 
     #####
     # TransvectionAtAlpha2()
@@ -782,7 +782,7 @@ end);
 InstallGlobalFunction(  UnitriangularDecompositionSpEvenChar,
 function( arg )
 
-    local u1, u2, d, fld, f, alpha, c, r, j, a, z, i, Mul, g, ell, slp, hs, tmppos, AEMrespos, u1pos, u2pos, tvpos, T2pos, T3pos, T4pos, tmppos2, uipos, q, f2, TransvecAtAlpha2, TransvecAtAlpha3, TransvecAtAlpha4, test, ShiftTransvection3ByJ, ShiftTransvection3ByI, ShiftTransvection4, ShiftTransvection2ByJ, ShiftTransvection2ByI, stdgens;
+    local u1, u2, d, fld, f, alpha, c, r, j, a, z, i, Mul, g, ell, slp, hs, tmppos, AEMrespos, u1pos, u2pos, tvpos, T2pos, T3pos, T4pos, tmppos2, uipos, f2, TransvecAtAlpha2, TransvecAtAlpha3, TransvecAtAlpha4, test, ShiftTransvection3ByJ, ShiftTransvection3ByI, ShiftTransvection4, ShiftTransvection2ByJ, ShiftTransvection2ByI, stdgens;
 
     #    ###############
     #    Local Functions
@@ -1529,21 +1529,24 @@ end);
 #####
 
 InstallGlobalFunction(  LGOStandardGensSp,
-function( d, q )
+function( d, fld )
 
-    local w,s, t, delta, u, v, x, J, fld;
+    local w,s, t, delta, u, v, x, J;
 
     if d < 6 then
         Error("LGOStandardGens: d has to be at least 6\n");
         return;
     fi;
 
-    if (q mod 2 = 0) then
-        return LGOStandardGensSpEvenChar(d,q);
+    if IsInt(fld) then
+      fld := GF(fld);
     fi;
 
-    fld := GF(q);
-    w := Z(q);
+    if IsEvenInt(Characteristic(fld)) then
+        return LGOStandardGensSpEvenChar(d,fld);
+    fi;
+
+    w := PrimitiveRoot(fld);
 
     s := IdentityMat( d, fld );
     s[1,1] := Zero(fld);
@@ -1584,12 +1587,15 @@ end);
 #####
 
 InstallGlobalFunction(  LGOStandardGensSpEvenChar,
-function( d, q )
+function( d, fld )
 
-    local w,s, t, delta, u, v, x, J, fld;
+    local w,s, t, delta, u, v, x, J;
 
-    fld := GF(q);
-    w := Z(q);
+    if IsInt(fld) then
+      fld := GF(fld);
+    fi;
+
+    w := PrimitiveRoot(fld);
 
     s := IdentityMat( d, fld );
     s[1,1] := Zero(fld);
@@ -1947,7 +1953,7 @@ end);
 InstallGlobalFunction(  BruhatDecompositionSp,
 function( stdgens, g )
 
-    local slp, u1, pm, u2, p_sign, diag, res1, res2, res3, lastline, line, pgr, fld, q;
+    local slp, u1, pm, u2, p_sign, diag, res1, res2, res3, lastline, line, pgr, fld;
 
     # We write an SLP into the variable slp
     # The first 12 entries are the stdgens and their inverses
@@ -1957,11 +1963,10 @@ function( stdgens, g )
             "returns an SLP to generate u1, u2, p_sign, diag\n"    );
 
     fld := FieldOfMatrixList( stdgens );
-    q := Size(fld);
 
     # Compute the matrices u1,u2 of Bruhat-Decomposition and the instructions
     # for an SLP that compute u1 and u2
-    if q mod 2 = 0 then
+    if IsEvenInt(Characteristic(fld)) then
         res1 := UnitriangularDecompositionSpEvenChar( stdgens, g);
     else
         res1 := UnitriangularDecompositionSp( stdgens, g);
