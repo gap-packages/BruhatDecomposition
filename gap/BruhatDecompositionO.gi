@@ -953,7 +953,8 @@ function(arg)
     # If g is already a monomial matrix return u_1 = u_2 = I_d
     if TestIfMonomial( g ) then
         Add( slp, [ [1,0],[1,0] ] );
-        return [ slp, [u1,g,u2] ];
+        # g is its own monomial part, and u1 = u2 = I_d
+        return [ slp, [g,u1,u2], HighestSlotOfSLP(slp) ];
     fi;
 
     f := DegreeOverPrimeField(fld); #ie q=p^f
@@ -1539,7 +1540,8 @@ function(arg)
     # If g is already a monomial matrix return u_1 = u_2 = I_d
     if TestIfMonomial( g ) then
         Add( slp, [ [1,0],[1,0] ] );
-        return [ slp, [u1,g,u2] ];
+        # g is its own monomial part, and u1 = u2 = I_d
+        return [ slp, [g,u1,u2], HighestSlotOfSLP(slp) ];
     fi;
 
     f := DegreeOverPrimeField(fld); #ie q=p^f
@@ -2156,7 +2158,8 @@ function(arg)
     # If g is already a monomial matrix return u_1 = u_2 = I_d
     if TestIfMonomial( g ) then
         Add( slp, [ [1,0],[1,0] ] );
-        return [ slp, [u1,g,u2] ];
+        # g is its own monomial part, and u1 = u2 = I_d
+        return [ slp, [g,u1,u2], HighestSlotOfSLP(slp) ];
     fi;
 
     f := DegreeOverPrimeField(fld); #ie q=p^f
