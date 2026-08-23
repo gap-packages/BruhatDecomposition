@@ -38,7 +38,7 @@ function(e, d, q)
     fi;
 
     if e = -1 then
-        if d < 6 then
+        if d < 8 then
             Error("LGOStandardGens: d has to be at least 8\n");
             return;
         fi;
@@ -46,7 +46,7 @@ function(e, d, q)
     fi;
 
     if e = 0 then
-        if d < 6 then
+        if d < 7 then
             Error("LGOStandardGens: d has to be at least 7\n");
             return;
         fi;
