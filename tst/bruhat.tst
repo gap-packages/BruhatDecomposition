@@ -32,6 +32,15 @@ gap> m := [[0,0,0,1,0,0],[1,0,0,0,0,0],[0,1,0,0,0,0],
 gap> BruhatCheckElement(fam, LGOStandardGensSpEvenChar(6,2), m, "issue14");
 [  ]
 
+# LGOStandardGensSp and its even characteristic variant take a field, and
+# still accept the field size.
+gap> LGOStandardGensSp(6,GF(5)) = LGOStandardGensSp(6,5);
+true
+gap> LGOStandardGensSp(6,GF(4)) = LGOStandardGensSpEvenChar(6,GF(4));
+true
+gap> LGOStandardGensSpEvenChar(6,4) = LGOStandardGensSpEvenChar(6,GF(4));
+true
+
 # The generic entry point picks the right family.
 gap> g := PseudoRandom(Group(LGOStandardGensSp(8,5)));;
 gap> res := BruhatDecomposition(g);;
