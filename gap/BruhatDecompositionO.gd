@@ -50,7 +50,7 @@
 #! This function computes the standard generators of SO
 #! as given by C. R. Leedham-Green and E. A. O'Brien in
 #! "Constructive Recognition of Classical Groups in odd characteristic"
-#! Depending on <M>e</M> and <M>p</M> (notice <M>q = p^f</M> with p prime), the functions &#95;&#95;<C>LGOStandardGensSOPlus(d,q)</C>, &#95;&#95;<C>LGOStandardGensSOCircle(d,q)</C> or &#95;&#95;<C>LGOStandardGensSOMinus(d,q)</C> are called.
+#! Depending on <M>e</M> and <M>p</M> (notice <M>q = p^f</M> with p prime), the functions &#95;&#95;<C>LGOStandardGensSOPlus(d,fld)</C>, &#95;&#95;<C>LGOStandardGensSOCircle(d,fld)</C> or &#95;&#95;<C>LGOStandardGensSOMinus(d,fld)</C> are called.
 DeclareGlobalFunction( "LGOStandardGensSO" );
 DeclareGlobalFunction( "__LGOStandardGensSOPlus" );
 DeclareGlobalFunction( "__LGOStandardGensSOCircle" );
@@ -74,7 +74,7 @@ DeclareGlobalFunction( "__LGOStandardGensSOMinus" );
 #! as given by C. R. Leedham-Green and E. A. O'Brien in
 #! "Constructive Recognition of Classical Groups in odd characteristic" and
 #! "Constructive Recognition of Classical Groups in even characteristic"
-#! Depending on <M>e</M>, the functions &#95;&#95;<C>LGOStandardGensOmegaPlus(d,q)</C>, &#95;&#95;<C>LGOStandardGensOmegaPlusEvenChar(d,q)</C>, &#95;&#95;<C>LGOStandardGensOmegaCircle(d,q)</C>, &#95;&#95;<C>LGOStandardGensOmegaCircleEvenChar(d,q)</C> &#95;&#95;<C>LGOStandardGensOmegaMinus(d,q)</C> or &#95;&#95;<C>LGOStandardGensOmegaMinusEvenChar(d,q)</C> are called.
+#! Depending on <M>e</M>, the functions &#95;&#95;<C>LGOStandardGensOmegaPlus(d,fld)</C>, &#95;&#95;<C>LGOStandardGensOmegaPlusEvenChar(d,fld)</C>, &#95;&#95;<C>LGOStandardGensOmegaCircle(d,fld)</C>, &#95;&#95;<C>LGOStandardGensOmegaCircleEvenChar(d,fld)</C> &#95;&#95;<C>LGOStandardGensOmegaMinus(d,fld)</C> or &#95;&#95;<C>LGOStandardGensOmegaMinusEvenChar(d,fld)</C> are called.
 DeclareGlobalFunction( "LGOStandardGensOmega" );
 DeclareGlobalFunction( "__LGOStandardGensOmegaPlus" );
 DeclareGlobalFunction( "__LGOStandardGensOmegaPlusEvenChar" );

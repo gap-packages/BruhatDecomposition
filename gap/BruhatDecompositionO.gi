@@ -42,7 +42,7 @@ function(e, d, q)
             Error("LGOStandardGens: d has to be at least 8\n");
             return;
         fi;
-        return __LGOStandardGensSOMinus(d,q); # TODO: use fld?
+        return __LGOStandardGensSOMinus(d,fld);
     fi;
 
     if e = 0 then
@@ -195,12 +195,12 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensSOMinus,
-function(d,q)
-    local s, t, delta, u, v, sigma, fld, w, n, S1, lambda, A, B, C, gamma, alpha,perm, inv, gamma2;
+function(d,fld)
+    local s, t, delta, u, v, sigma, q, w, n, S1, lambda, A, B, C, gamma, alpha,perm, inv, gamma2;
 
-    fld := GF(q);
-    gamma := Z(q^2);
-    gamma2 := Z(q);
+    q := Size(fld);
+    gamma := PrimitiveRoot(GF(q^2));
+    gamma2 := PrimitiveRoot(fld);
     alpha := gamma^((q+1)/2);
     w := alpha^2;
 
@@ -273,7 +273,7 @@ function(e, d, q)
         fi;
 
         if e = -1 then
-            return __LGOStandardGensOmegaMinusEvenChar(d,q);
+            return __LGOStandardGensOmegaMinusEvenChar(d,fld);
         fi;
 
         if e = 0 then
@@ -285,7 +285,7 @@ function(e, d, q)
         fi;
 
         if e = -1 then
-            return __LGOStandardGensOmegaMinus(d,q);
+            return __LGOStandardGensOmegaMinus(d,fld);
         fi;
 
         if e = 0 then
@@ -424,12 +424,12 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensOmegaMinus,
-function(d,q)
-    local s, t, delta, u, v, sigma, fld, w, n, S1, lambda, A, B, C, gamma, alpha,perm, inv, gamma2;
+function(d,fld)
+    local s, t, delta, u, v, sigma, q, w, n, S1, lambda, A, B, C, gamma, alpha,perm, inv, gamma2;
 
-    fld := GF(q);
-    gamma := Z(q^2);
-    gamma2 := Z(q);
+    q := Size(fld);
+    gamma := PrimitiveRoot(GF(q^2));
+    gamma2 := PrimitiveRoot(fld);
     alpha := gamma^((q+1)/2);
     w := alpha^2;
 
@@ -555,12 +555,12 @@ end);
 #####
 
 InstallGlobalFunction(  __LGOStandardGensOmegaMinusEvenChar,
-function(d,q)
-    local s, t, delta, u, v, sigma, fld, w, n, S1, lambda, A, B, C, gamma,perm, inv, gamma2, nu;
+function(d,fld)
+    local s, t, delta, u, v, sigma, q, w, n, S1, lambda, A, B, C, gamma,perm, inv, gamma2, nu;
 
-    fld := GF(q);
-    gamma := Z(q^2);
-    gamma2 := Z(q);
+    q := Size(fld);
+    gamma := PrimitiveRoot(GF(q^2));
+    gamma2 := PrimitiveRoot(fld);
     w := gamma^(q+1);
 
     nu := gamma + gamma^q;
@@ -655,7 +655,7 @@ function(e,d,fld)
 
     elif e = -1 then
         #gens := __LGOStandardGensChangeSOMinus(d,q);
-        gens := __LGOStandardGensSOMinus(d,q);
+        gens := __LGOStandardGensSOMinus(d,fld);
 
         m:= d/2;
 

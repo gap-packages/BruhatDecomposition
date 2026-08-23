@@ -39,11 +39,11 @@
 #   LGOStandardGensSp
 #####
 
-#! @Arguments d q
+#! @Arguments d fld
 #! @Returns stdgens (the LGO standard-generators of Sp<M>(d,q)</M>)
 #! @Description
 #! <M>d</M>: The dimension of our matrix. Notice that <M>d</M> needs to be even for symplectic groups. <M>\newline</M>
-#! <M>q</M>: A prime power <M>q = p^f</M>, where <M>F_q</M> ist the field wherever the matrices are defined <M>\newline</M>
+#! <C>fld</C>: The field <M>F_q</M> over which the matrices are defined; a prime power <M>q = p^f</M> is also accepted <M>\newline</M>
 #! This function computes the standard generators of Sp
 #! as given by C. R. Leedham-Green and E. A. O'Brien in
 #! "Constructive Recognition of Classical Groups in odd characteristic"
@@ -55,11 +55,11 @@ DeclareGlobalFunction( "LGOStandardGensSp" );
 #   LGOStandardGensSpEvenChar
 #####
 
-#! @Arguments d q
+#! @Arguments d fld
 #! @Returns stdgens (the LGO standard-generators of Sp<M>(d,q)</M>) for q even
 #! @Description
 #! <M>d</M>: The dimension of our matrix. Notice that <M>d</M> needs to be even for symplectic groups. <M>\newline</M>
-#! <M>q</M>: A 2 power <M>q = 2^f</M>, where <M>F_q</M> ist the field wherever the matrices are defined <M>\newline</M>
+#! <C>fld</C>: The field <M>F_q</M> with <M>q = 2^f</M> over which the matrices are defined; <M>q</M> itself is also accepted <M>\newline</M>
 #! This function computes the standard generators of Sp
 #! as given by C. R. Leedham-Green and E. A. O'Brien in
 #! "Constructive Recognition of Classical Groups in even characteristic"

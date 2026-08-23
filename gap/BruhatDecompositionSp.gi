@@ -1591,6 +1591,10 @@ function( d, fld )
 
     local w,s, t, delta, u, v, x, J;
 
+    if IsInt(fld) then
+      fld := GF(fld);
+    fi;
+
     w := PrimitiveRoot(fld);
 
     s := IdentityMat( d, fld );
