@@ -3119,8 +3119,12 @@ function( arg )
     Add( slp, [ p_signpos ,1 ] );
 
     tmpvalue := EasyFormToMonomialMatrix(tmpvalue,n,fld);
-    tmpvalue := R2*tmpvalue*L2;
-    mat := tmpvalue*mat;
+    tmpvalue := MutableCopyMat( R2*tmpvalue*L2 );
+    mat := MutableCopyMat( tmpvalue*mat );
+
+    # The middle entry of the diagonal part has to be 1. Its sign belongs to
+    # the monomial part, so move it there instead of dropping it.
+    tmpvalue[m] := mat[m,m] * tmpvalue[m];
     mat[m,m] := One(fld);
 
     return [slp, [tmpvalue , mat ] ];
