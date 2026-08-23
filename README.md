@@ -14,6 +14,19 @@ This package can be used to compute the Bruhat decomposition of elements in thei
 
  * The file manual.pdf is in the `doc` subdirectory.
 
+## Tests
+
+From the package directory:
+
+    gap tst/testall.g       # a few seconds, every family over small groups
+    gap tst/testallmain.g   # several minutes, many dimensions and field sizes
+
+Both check that the straight-line program and the matrices returned by each
+decomposition reproduce the input. The parameters of the thorough run can be
+set beforehand, e.g.
+
+    gap -c 'BruhatTestDims := [6..9];; BruhatTestRandomElements := 10;;' tst/testallmain.g
+
 ## Contact
 
 If you have a question relating to `BruhatDecomposition`, encounter any problems, or have a suggestion for extending the package in any way, please
