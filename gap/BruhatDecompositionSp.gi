@@ -1956,7 +1956,7 @@ function( stdgens, g )
     Info( InfoBruhat, 1,
             "returns an SLP to generate u1, u2, p_sign, diag\n"    );
 
-    fld := FieldOfMatrixList( [g] );
+    fld := FieldOfMatrixList( stdgens );
     q := Size(fld);
 
     # Compute the matrices u1,u2 of Bruhat-Decomposition and the instructions
