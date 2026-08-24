@@ -109,10 +109,8 @@ gap> c := CoefficientsPrimitiveElement( fld, PrimitiveRoot(fld) );;
 gap> Sum( [1..Length(c)], i -> c[i] * PrimitiveRoot(fld)^0 * Z(3)^0 ) <> fail;
 true
 
-# The generic entry point, on the two families it does recognise. It decides
-# by testing membership in GAP's own classical groups, which use a different
-# form than the LGO standard generators, so SU and SO elements are announced
-# and decomposed as SL. See issue #26.
+# The generic entry point, on every family it dispatches to. Dimensions
+# above 6, so that the ambiguity warning does not fire.
 gap> CheckGeneric := function( stdgens )
 >     local g, res, m;
 >     g := PseudoRandom( Group( stdgens ) );
@@ -129,8 +127,23 @@ true
 gap> CheckGeneric( LGOStandardGensSp(8,5) );
 Element g in contained in Sp(8, 5) 
 true
+gap> CheckGeneric( LGOStandardGensSp(8,4) );
+Element g in contained in Sp(8, 4) 
+true
 gap> CheckGeneric( LGOStandardGensSU(8,5) );
-Element g in contained in SL(8, 25) 
+Element g in contained in SU(8, 5) 
+true
+gap> CheckGeneric( LGOStandardGensSU(9,5) );
+Element g in contained in SU(9, 5) 
+true
+gap> CheckGeneric( LGOStandardGensSO(1,8,5) );
+Element g in contained in SO(+, 8, 5) 
+true
+gap> CheckGeneric( LGOStandardGensSO(-1,8,5) );
+Element g in contained in SO(-, 8, 5) 
+true
+gap> CheckGeneric( LGOStandardGensSO(0,9,5) );
+Element g in contained in SO(o, 9, 5) 
 true
 
 # A matrix in none of them: the determinant is not 1.
