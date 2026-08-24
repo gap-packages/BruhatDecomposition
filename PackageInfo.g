@@ -85,6 +85,7 @@ Dependencies := rec(
   GAP := ">= 4.10",
   NeededOtherPackages := [ ],
   SuggestedOtherPackages := [ ],
+  TestPackages := [ [ "forms", ">= 1.2" ] ],
   ExternalConditions := [ ],
 ),
 

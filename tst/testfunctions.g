@@ -80,6 +80,64 @@ BruhatCheckElement := function( fam, stdgens, g, label )
     return [];
 end;
 
+# The LGO standard generators are written with respect to a different form
+# than GAP's classical groups, so a generator is never literally an element of
+# Sp(d,q) or SO(e,d,q). The forms package recovers the form each side
+# preserves and the base change to a canonical one; composing the two gives a
+# matrix conjugating the LGO copy onto GAP's.
+#
+# The Gram matrix the forms package returns varies between calls -- a scalar
+# multiple -- so never compare that; the conjugation it leads to is stable.
+# The forms functions are reached through ValueGlobal so that reading this
+# file without the forms package installed does not warn about them.
+BruhatFormBridge := function( gens, target )
+    local baseChange, formOf, b1, b2;
+
+    baseChange := ValueGlobal( "BaseChangeToCanonical" );
+    formOf := function( G )
+        local f;
+        f := ValueGlobal( "PreservedQuadraticForms" )( G );
+        if IsEmpty( f ) then
+            f := ValueGlobal( "PreservedSesquilinearForms" )( G );
+        fi;
+        return f[1];
+    end;
+
+    b1 := baseChange( formOf( Group( gens ) ) );
+    b2 := baseChange( formOf( target ) );
+    return b2^-1 * b1;
+end;
+
+# Whether the forms package can be used, without saying anything if it cannot.
+# It is a TestPackages dependency, so loading the package does not load it.
+BruhatHasForms := function()
+    if TestPackageAvailability( "forms" ) = fail then
+        return false;
+    fi;
+    return LoadPackage( "forms", false ) = true;
+end;
+
+# Whether every one of gens lands in target under the bridge, which is what
+# says the LGO standard generators of a family really are elements of that
+# family. It does not say they generate the whole of it -- computing the order
+# of a matrix group this size takes minutes -- but that is what the
+# decompositions themselves exercise.
+#
+# Without the forms package there is no bridge, and this passes rather than
+# failing on a missing optional dependency.
+BruhatGensLieIn := function( gens, target )
+    local c;
+
+    if not BruhatHasForms() then
+        return true;
+    fi;
+    if NrRows( gens[1] ) <> NrRows( One( target ) ) then
+        return false;
+    fi;
+    c := BruhatFormBridge( gens, target );
+    return ForAll( gens, g -> c * g * c^-1 in target );
+end;
+
 # True if calling func with args raises an error, which is what every one of
 # these functions is supposed to do on input it cannot use.
 BruhatRejects := function( func, args )

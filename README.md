@@ -22,8 +22,12 @@ From the package directory:
     gap tst/testallmain.g   # several minutes, many dimensions and field sizes
 
 Both check that the straight-line program and the matrices returned by each
-decomposition reproduce the input. The parameters of the thorough run can be
-set beforehand, e.g.
+decomposition reproduce the input. If the
+[forms](https://gap-packages.github.io/forms/) package is installed, the fast
+run additionally checks that the LGO standard generators really are elements
+of the classical group they belong to.
+
+The parameters of the thorough run can be set beforehand, e.g.
 
     gap -c 'BruhatTestDims := [6..9];; BruhatTestRandomElements := 10;;' tst/testallmain.g
 
