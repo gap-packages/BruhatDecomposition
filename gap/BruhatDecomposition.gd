@@ -44,5 +44,13 @@
 #! @Arguments g
 #! @Returns pgr (A SLP to compute <M>u_1,u_2,p_{sign}</M> and <M>diag</M> and the matrices <M>u_1, u_2, p_{sign}</M> and <M>diag</M> itself.)
 #! @Description
-#! Checks whether <M>g</M> is an element of one of the classical groups in their natural representation. If yes, the corresponding Bruhat decomposition of the group and the element <M>g</M> is calculated. Otherwise the function prints a warning.
+#! Checks whether <M>g</M> is an element of one of the classical groups with
+#! respect to the form the LGO standard generators use. If yes, the
+#! corresponding Bruhat decomposition of the group and the element <M>g</M> is
+#! calculated. Otherwise the function prints a warning. <P/>
+#! The field is the one spanned by the entries of <M>g</M>, which is all a
+#! single matrix offers: an element of SU<M>(d,q)</M> whose entries happen to
+#! lie in a proper subfield of <M>F_{q^2}</M> is treated as an element of
+#! SL over that subfield. Call the decomposition for the group directly if the
+#! group <M>g</M> came from matters.
 DeclareGlobalFunction( "BruhatDecomposition" );
