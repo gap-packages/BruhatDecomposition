@@ -20,7 +20,7 @@ Persons := [
     #WWWHome := TODO,
     Email := "rademacher@art.rwth-aachen.de",
     IsAuthor := true,
-    IsMaintainer := true,
+    IsMaintainer := false,
     PostalAddress := Concatenation(
                "Daniel Rademacher\n",
                "Chair of Algebra and Representation Theory\n",
@@ -47,6 +47,23 @@ Persons := [
                "Germany" ),
     Place := "Aachen",
     Institution := "Chair of Algebra and Representation Theory, RWTH Aachen",
+  ),
+  rec(
+    LastName      := "Horn",
+    FirstNames    := "Max",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    Email         := "mhorn@rptu.de",
+    WWWHome       := "https://www.quendi.de/math",
+    GitHubUsername:= "fingolfin",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "RPTU Kaiserslautern-Landau\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "RPTU Kaiserslautern-Landau"
   ),
 ],
 
